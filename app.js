@@ -17,7 +17,7 @@ formulario.addEventListener("submit", (e)=>{
     contenedor.innerHTML += `<div id="${id}" class="publicacion">
             <p>id: ${id}</p>
             <p>${descripcion}</p>
-            <button>editar</button>
+            <button id="editar" onclick="editar(this)">editar</button>
             <button id="eliminar" onclick="eliminar(this)">eliminar</button>
         </div>`;
         id++;
@@ -25,4 +25,28 @@ formulario.addEventListener("submit", (e)=>{
 
 function eliminar(e){
     e.parentElement.remove(this)
+}
+
+function editar(e){
+    const parrafo = e.parentElement.querySelector("p:nth-of-type(2)");
+
+    const inputEd = document.createElement("input");
+    inputEd.value = (parrafo.textContent);
+    e.parentElement.appendChild(inputEd);
+
+    const guardar = document.createElement("button")
+    guardar.textContent = "guardar";
+
+    guardar.onclick = function() {
+        inputEd.value;
+        inputEd.remove();
+        guardar.remove();
+        e.style.display = "inline";
+    };
+
+    publicacion.appendChild(inputEd);
+
+    publicacion.appendChild(guardar);
+
+    e.style.display = "none";
 }
